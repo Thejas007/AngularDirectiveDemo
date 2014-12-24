@@ -35,7 +35,7 @@ directiveDemo.directive('heading4', function() {
     scope:{
       myInfo: '=info'
     },
-    template:'<h1>{{myInfo}}</h1> {{info}}'
+    template:"<h1>{{myInfo}}</h1> {{info}} "
   };
 });
 
@@ -51,3 +51,68 @@ directiveDemo.directive('heading5', function() {
 });
 
 // 4. Transclude
+//What does this transclude option do, exactly?
+// transclude makes the contents of a directive with this option have access to the scope outside of the directive rather than inside.
+directiveDemo.directive('heading6', function() {
+
+  return {
+    restrict:'E',//@A attribute, @E element,@C class
+    transclude:true,
+    template:"<div><input ng-model='Details.Address'/><div ng-transclude></div></div>"
+  };
+});
+
+//5. link functions
+
+directiveDemo.directive('onlyInteger', function() {
+
+  return {
+    restrict:'A',//@A attribute, @E element,@C class
+    require:'ngModel',
+    link:function(scope,element,attrs,ctrls){
+      element.on('keydown', function (event) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ([
+          46,
+          8,
+          9,
+          27,
+          13,
+          110
+          ].indexOf(event.keyCode) !== -1 || event.keyCode == 65 && event.ctrlKey === true || event.keyCode >= 35 && event.keyCode <= 39) {
+
+            // let it happen, don't do anything
+            return;
+          } else {
+            // Ensure that it is a number and stop the keypress
+            if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+              event.preventDefault();
+            }
+
+          }
+        });
+
+
+    }
+  };
+});
+
+
+directiveDemo.directive('maxValue', function() {
+
+  return {
+    restrict:'A',//@A attribute, @E element,@C class
+    require:'ngModel',
+    link:function(scope,element,attrs,ctrl){
+      element.on('blur', function () {
+        var value = scope.$eval(attrs.maxValue);
+        var enetredValue=scope.$eval(attrs.ngModel);
+        if (parseInt(enetredValue) > value)
+          ctrl.$setValidity('greater', true);
+          else
+            ctrl.$setValidity('greater', false);
+        scope.$apply();
+      });
+      }
+    };
+  });
