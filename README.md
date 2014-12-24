@@ -1,4 +1,4 @@
-AngularDirectiveDemo
+Angular Directive Demo
 ====================
 
 Angular Directive Demo
