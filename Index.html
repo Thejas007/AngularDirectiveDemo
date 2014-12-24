@@ -6,12 +6,27 @@
 </head>
 <body ng-app="DirectiveDemo">
   <div ng-controller="DemoCtrl">
+
+    <input ng-model='Details.Name'/>
     <h1 data-heading1></h1>
     <heading2></heading2>
     <heading4 info="Details"></heading4>
     <heading5 info="Details"></heading5>
+    <heading6 info="Details">
+
+    <div>The Address is : {{Details.Address}}</div>
+    </heading6>
+    Enter Only integer
+<input only-integer ng-model='Value'/>
+<div>
+  <form name='TestForm'>
+    <input name='input1' max-value='10' ng-model='Value2'/>
+    <div ng-show='input1.$error.greater'>Error </div>
+  </form>
+</div>
 
   </div>
+
 
 </body>
 </html>
