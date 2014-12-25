@@ -4,7 +4,7 @@ directiveDemo.directive('heading1', function() {
 
   return {
     restrict:'A',
-  template:'Heading 1'
+  template:'attribute output'
   };
 });
 
@@ -13,7 +13,7 @@ directiveDemo.directive('heading2', function() {
 
   return {
     restrict:'E',
-    template:'<h2>Heading 2 {{Name}}</h2>'
+    template:'<h2>element output </h2>'//{{Name}}
     //template:Url:'templates\heading2.html'
   };
 });
@@ -28,7 +28,7 @@ directiveDemo.directive('heading3', function() {
 
 
 // 3. scope
-directiveDemo.directive('heading4', function() {
+directiveDemo.directive('scope1', function() {
 
   return {
     restrict:'E',//@A attribute, @E element,@C class
@@ -39,7 +39,7 @@ directiveDemo.directive('heading4', function() {
   };
 });
 
-directiveDemo.directive('heading5', function() {
+directiveDemo.directive('scope2', function() {
 
   return {
     restrict:'E',//@A attribute, @E element,@C class
@@ -108,9 +108,9 @@ directiveDemo.directive('maxValue', function() {
         var value = scope.$eval(attrs.maxValue);
         var enetredValue=scope.$eval(attrs.ngModel);
         if (parseInt(enetredValue) > value)
-          ctrl.$setValidity('greater', true);
+          ctrl.$setValidity('greaterValidation', false);
           else
-            ctrl.$setValidity('greater', false);
+            ctrl.$setValidity('greaterValidation', true);
         scope.$apply();
       });
       }
