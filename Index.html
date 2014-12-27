@@ -23,6 +23,33 @@ border-left-color: #5bc0de;
 h4{
   cursor: pointer;
 }
+.fa {
+display: inline-block;
+font-family: FontAwesome;
+font-style: normal;
+font-weight: normal;
+line-height: 1;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+.fa-star:before {
+content: "\2605";
+}
+.active {
+color: #a70;
+}
+[duo-stars] span,
+duo-stars span {
+  color: #ccc;
+  font-size:40px;
+}
+[duo-stars] .active,
+duo-stars .active {
+  color: #a70;
+}
+rating{
+font-size:30px;
+}
   </style>
 
 </head>
@@ -145,8 +172,32 @@ h4{
 </div>
       </div>
     </div>
-
+<div class="container">
+ <div class="bs-callout bs-callout-info" id="id4">
+    <h4 data-toggle="collapse" data-target="#demo6">Controllers usage</h4>
+<p> </p>
+  </div>
+           <div id="demo6" class="collapse">
+        <code> </code>
+     <div class="container">
+    <h4> Rating directive</h4>
+  <div class="row">
+  <rating ng-model="ratingValue1" max="10"></rating>
   
+  </div>
+  <div class="row">
+  <rating ng-model="ratingValue2" max="10" value="5"></rating>
+  </div>
+  <div class="row">
+  <duo-stars ng-model="myval" max="10" value="3" ></duo-stars>
+  </div>
+  <div class="row">
+  <duo-stars ng-model="myval2" max="10" value="3" readonly></duo-stars>
+  </div>
+</div>
+      </div>
+    </div>
+ 
 </div>
   </div>
 
