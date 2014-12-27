@@ -116,3 +116,72 @@ directiveDemo.directive('maxValue', function() {
       }
     };
   });
+  
+  directiveDemo.directive('rating', function() {
+
+  return {
+    restrict:'EA',//@A attribute, @E element,@C class
+    require:'ngModel',
+	scope:{
+		ngModel:'=',
+		max:'='
+	},
+	template:'<span ng-repeat="star in stars" ng-class="{\'active\':$index<ngModel}" ng-click="setVal(star)"><i class="glyphicon glyphicon-star-empty"></i></span>',
+	 link: function(scope, elem, attr) {
+        if (attr.value) {
+          scope.ngModel = attr.value;
+        }
+        
+      },
+	controller:function($scope){
+		$scope.stars=[];
+		for(var i=1;i<=$scope.max;i++){
+			$scope.stars.push(i);
+		}
+		$scope.setVal=function(index){
+			$scope.ngModel=index;
+		};
+		
+	}
+    
+    };
+  });
+  
+  directiveDemo.directive('duoStars', function() {
+    return {
+      scope: {
+        "ngModel": "=",
+        "max": "="
+      },
+      restrict: "EA",
+      template: '<span ng-repeat="star in stars" ng-class="{\'active\':$index<ngModel}" ng-click="setVal(star)"><i class="fa fa-star"></i></span>',
+      require: "ngModel",
+      link: function(scope, elem, attr) {
+        if (attr.value) {
+          scope.ngModel = attr.value;
+        }
+        if ((attr.readonly != null)) {
+          return scope.readonly = true;
+        }
+      },
+      controller: function($scope) {
+        var _i, _ref, _results;
+        $scope.stars = (function() {
+          _results = [];
+          for (var _i = 1, _ref = $scope.max; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--){ _results.push(_i); }
+          return _results;
+        }).apply(this);
+        return $scope.setVal = function(index) {
+          if ($scope.readonly) {
+            return;
+          }
+          if (($scope.ngModel === index && index === 1)) {
+            return $scope.ngModel = 0;
+          } else {
+            return $scope.ngModel = index;
+          }
+        };
+      }
+    };
+  });
+
