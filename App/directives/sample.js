@@ -1,20 +1,23 @@
 angular.module('app', []).
-controller('box', function($scope) {
-    $scope.boxModel = 'first value';
+controller('form', function($scope) {
+    $scope.model1 = 'first value';
+     $scope.model2 = '';
 }).
-directive('box',
+directive('modelclearondisable',
     function() {
         return {
             restrict: 'EA',
             require: 'ngModel',
-            scope: {
-            },
+             scope: {
+                        model: '=ngModel',
+                        disable:'=ngDisabled'
+        },
             link: function(scope, iElement, iAttrs, ngModel) {
                console.log(iAttrs);
-              scope.$watch(iAttrs.todisable,function(value){
+              scope.$watch("disable",function(value){
                 if(value){
-                 ngModel.$setViewValue('second value');
-                ngModel.$render();
+                 ngModel.$setViewValue('');
+               ngModel.$render();
                 console.log(ngModel);
                 }
                 });
